@@ -1,0 +1,23 @@
+#include <stdio.h>
+#include <ctype.h>
+
+int isValidString(char str[]) {
+    for (int i = 0; str[i] != '\0'; i++) {
+        if (!isalnum(str[i]))  // not alphabet and not digit
+            return 0;
+    }
+    return 1;
+}
+
+int main() {
+    char str[100];
+    printf("Enter a string: ");
+    scanf("%s", str);
+
+    if (isValidString(str))
+        printf("Valid String\n");
+    else
+        printf("Invalid String\n");
+
+    return 0;
+}
