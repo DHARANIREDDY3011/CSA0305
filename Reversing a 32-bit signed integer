@@ -1,0 +1,22 @@
+#include <stdio.h>
+#include <limits.h>
+
+int reverse(int num) {
+    long rev = 0;  // use long to check overflow
+    while (num != 0) {
+        rev = rev * 10 + num % 10;
+        num /= 10;
+    }
+    if (rev > INT_MAX || rev < INT_MIN) {
+        return 0; // overflow case
+    }
+    return (int)rev;
+}
+
+int main() {
+    int n;
+    printf("Enter a number: ");
+    scanf("%d", &n);
+    printf("Reversed: %d\n", reverse(n));
+    return 0;
+}
