@@ -1,0 +1,38 @@
+#include <stdio.h>
+#include <string.h>
+
+// Function to find the first occurrence of needle in haystack
+char* findSubstring(const char* haystack, const char* needle) {
+    int hLen = strlen(haystack);
+    int nLen = strlen(needle);
+
+    if (nLen == 0)
+        return (char*)haystack;
+
+    for (int i = 0; i <= hLen - nLen; i++) {
+        int j;
+        for (j = 0; j < nLen; j++) {
+            if (haystack[i + j] != needle[j])
+                break;
+        }
+
+        if (j == nLen)
+            return (char*)&haystack[i]; // Found match
+    }
+
+    return NULL; // Not found
+}
+
+int main() {
+    const char* haystack = "This is a simple haystack example.";
+    const char* needle = "haystack";
+
+    char* result = findSubstring(haystack, needle);
+
+    if (result != NULL)
+        printf("Found at position: %ld\n", result - haystack);
+    else
+        printf("Not found.\n");
+
+    return 0;
+}
