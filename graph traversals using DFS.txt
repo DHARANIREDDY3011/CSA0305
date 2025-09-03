@@ -1,0 +1,35 @@
+
+#include <stdio.h>
+#define MAX 100
+
+int adj[MAX][MAX], visited[MAX], n;
+
+void dfs(int v) {
+    visited[v] = 1;
+    printf("%d ", v);
+    for (int i = 0; i < n; i++) {
+        if (adj[v][i] && !visited[i])
+            dfs(i);
+    }
+}
+
+int main() {
+    int edges, u, v, start;
+    printf("Enter number of vertices: ");
+    scanf("%d", &n);
+    printf("Enter number of edges: ");
+    scanf("%d", &edges);
+
+    for (int i = 0; i < edges; i++) {
+        printf("Enter edge (u v): ");
+        scanf("%d %d", &u, &v);
+        adj[u][v] = adj[v][u] = 1; // undirected
+    }
+
+    printf("Enter start vertex: ");
+    scanf("%d", &start);
+
+    printf("DFS Traversal: ");
+    dfs(start);
+    return 0;
+}

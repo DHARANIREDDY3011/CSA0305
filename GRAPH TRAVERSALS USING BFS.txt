@@ -1,0 +1,54 @@
+#include <stdio.h>
+#define MAX 100
+
+int adj[MAX][MAX], visited[MAX], queue[MAX];
+int front = -1, rear = -1, n;
+
+void enqueue(int v) {
+    if (rear == MAX - 1) return;
+    if (front == -1) front = 0;
+    queue[++rear] = v;
+}
+
+int dequeue() {
+    if (front == -1 || front > rear) return -1;
+    return queue[front++];
+}
+
+void bfs(int start) {
+    for (int i = 0; i < n; i++) visited[i] = 0;
+    enqueue(start);
+    visited[start] = 1;
+
+    while (front <= rear) {
+        int v = dequeue();
+        printf("%d ", v);
+        for (int i = 0; i < n; i++) {
+            if (adj[v][i] && !visited[i]) {
+                enqueue(i);
+                visited[i] = 1;
+            }
+        }
+    }
+}
+
+int main() {
+    int edges, u, v, start;
+    printf("Enter number of vertices: ");
+    scanf("%d", &n);
+    printf("Enter number of edges: ");
+    scanf("%d", &edges);
+
+    for (int i = 0; i < edges; i++) {
+        printf("Enter edge (u v): ");
+        scanf("%d %d", &u, &v);
+        adj[u][v] = adj[v][u] = 1; // undirected
+    }
+
+    printf("Enter start vertex: ");
+    scanf("%d", &start);
+
+    printf("BFS Traversal: ");
+    bfs(start);
+    return 0;
+}
